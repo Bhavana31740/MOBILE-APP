@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile App Redesign Concept</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(90deg, #fffbea 60%, #b388ff 100%);
+            color: #2c3e50;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(179,136,255,0.08);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
+        }
+        
+        nav {
+            flex: 1;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        nav ul li {
+            margin: 0;
+        }
+        
+        nav ul li a {
+            color: #2c3e50;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            font-size: 1.08rem;
+            letter-spacing: 1px;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background: linear-gradient(90deg, #ffe082 60%, #b388ff 100%);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(179,136,255,0.13);
+        }
+        
+        .logo {
+            font-size: 1.7rem;
+            font-weight: bold;
+            margin-left: auto;
+            color: #7c4dff;
+            letter-spacing: 1px;
+            padding-left: 2rem;
+            text-shadow: 0 2px 8px #ede7f6;
+        }
+        
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.7rem;
+            margin-left: 1.5rem;
+            color: #b388ff;
+            background: #fffbea;
+            border-radius: 50%;
+            padding: 0.3rem 0.7rem;
+            transition: background 0.2s;
+        }
+        
+        .menu-toggle:hover {
+            background: #ffe082;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 70vh;
+            background-image: linear-gradient(to right, rgba(44,62,80,0.9), rgba(52,152,219,0.7)), url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dc168f9e-5307-43fe-aede-2a11de75d871.png');
+            padding: 0 1.5rem;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        
+        .card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .feature-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            padding: 1.5rem;
+        }
+        
+        .card-content h3 {
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 0;
+            background-color: #ecf0f1;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-column ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        
+        .social-links a:hover {
+            color: white;
+            background-color: #3498db;
+            transform: scale(1.1);
+        }
+        
+        .social-links a:hover {
+            color: #3498db;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 900px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            nav {
+                width: 100%;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
+            }
+            .logo {
+                margin: 1rem 0 0 0;
+                padding-left: 0;
+                text-align: right;
+            }
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
+            nav {
+                display: none;
+            }
+            nav.show {
+                display: block;
+            }
+        }
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+            nav ul li a {
+                font-size: 1rem;
+                padding: 0.5rem 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="logo">Instagram<span style="color: #b388ff;">Redesign</span></div>
+            <div class="menu-toggle">☰</div>
+        </div>
+    </header>
+    
+    <section class="hero" id="home">
+        <h1>Instagram Mobile Redesign</h1>
+        <p>Addressing navigation pain points with an improved user experience that reduces cognitive load and improves discoverability</p>
+        <div class="btn-container">
+            <a href="#features" class="btn">View Features</a>
+            <a href="#contact" class="btn btn-secondary">Contact Us</a>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Key Features</h2>
+                <p>Discover what makes our design stand out</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="card-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/db75c9dd-921f-40ef-b6b9-d9af4e02c88b.png" alt="Instagram redesigned navigation screens">
+                    </div>
+                    <div class="card-content">
+                        <h3>Streamlined Navigation</h3>
+                        <p>Redesigned bottom navigation bar with prioritized actions and removed clutter based on user behavior analysis.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="card-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dcce514e-6ffa-4afb-908e-b47b9fee3c82.png" alt="Image showing flexible images scaling on different devices">
+                    </div>
+                    <div class="card-content">
+                        <h3>Improved Content Discovery</h3>
+                        <p>Redesigned Explore page with contextual filters and personalized recommendations based on usage patterns.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="card-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2ffa569f-4c2d-4d31-9b70-d90ca2d30ad5.png" alt="Image demonstrating media queries implementation">
+                    </div>
+                    <div class="card-content">
+                        <h3>Smart Breakpoints</h3>
+                        <p>Our design uses carefully crafted media queries to adapt content and navigation for specific device ranges.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Users Say</h2>
+                <p>Hear from our satisfied customers</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The responsive implementation was flawless across our 10,000+ employee devices. Page load times improved by 40%."
+                    </div>
+                    <div class="testimonial-author">- Sarah Johnson, Tech Director at Acme Inc</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "I'm amazed by how well the images and text reflow on my tablet. It's like the site was custom made for my device!"
+                    </div>
+                    <div class="testimonial-author">- Michael Chen</div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The mobile menu works so smoothly and the content remains perfectly readable on my small smartphone screen."
+                    </div>
+                    <div class="testimonial-author">- Emma Rodriguez</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <p>We specialize in creating fully responsive websites that deliver optimal user experiences across all devices.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>Email: info@responsiveweb.demo</li>
+                        <li>Phone: (555) 123-4567</li>
+                        <li>Address: 123 Web Design St</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 ResponsiveWeb. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle functionality
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('show');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu after click
+                document.querySelector('nav').classList.remove('show');
+            });
+        });
+        
+        // Adaptive loading for images
+        function loadAdaptiveImages() {
+            const images = document.querySelectorAll('img[data-src][src=""]');
+            images.forEach(img => {
+                const windowWidth = window.innerWidth;
+                let imageUrl = img.getAttribute('data-src');
+                
+                if (windowWidth < 768) {
+                    imageUrl = img.getAttribute('data-src-mobile') || imageUrl;
+                } else if (windowWidth < 1024) {
+                    imageUrl = img.getAttribute('data-src-tablet') || imageUrl;
+                }
+                
+                img.src = imageUrl;
+            });
+        }
+        
+        // Initialize adaptive images
+        window.addEventListener('load', loadAdaptiveImages);
+        window.addEventListener('resize', loadAdaptiveImages);
+    </script>
+</body>
+</html>
